@@ -3,18 +3,21 @@ package com.bechalor.sealthedeal.model;
 import javax.persistence.*;
 
 @Entity
-public class Appartment {
+public class Apartment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String adress;
+    private String address;
     private int rent;
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne
+    private Consumer consumer;
+
+    @ManyToOne
     private Vendor vendor;
 
     public int getId() {
@@ -25,12 +28,12 @@ public class Appartment {
         this.id = id;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getRent() {
@@ -47,5 +50,29 @@ public class Appartment {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Consumer getConsumer() {
+        return consumer;
+    }
+
+    public void setConsumer(Consumer consumer) {
+        this.consumer = consumer;
+    }
+
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 }
