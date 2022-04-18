@@ -11,12 +11,20 @@ public class Furniture {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String address;
-    private double price;
-    private int quantity;
+    private double price;//22
+    private int quantity;//55
     private Date date;
-    private String description;
-    private String product_name;
+    private String description;//33
+    private String product_name;//1
+    private String image;
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @OneToMany(mappedBy = "furniture",cascade = CascadeType.ALL)
     private Set<VendorHasFurniture> furnituresHasVendor=new LinkedHashSet<>();

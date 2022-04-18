@@ -1,10 +1,17 @@
 package com.bechalor.sealthedeal.model;
 
 import com.bechalor.sealthedeal.model.AdminModel.Admins;
+import com.bechalor.sealthedeal.model.Jwt.Authority;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -12,13 +19,13 @@ public class User {
     private String password;
     private String email;
     private String phone;
-    private int role;
+    private String role;
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -27,13 +34,15 @@ public class User {
     @OneToOne
     private Vendor vendor;
     @OneToOne
-    private User user;
-    @OneToOne
-    private House_assistant house_assistant;
+    private HouseAssistant house_assistant;
     @OneToOne
     private Admins admin;
     @OneToOne
     private Legal legal;
+    @OneToOne
+    private Doctor doctor;
+    @OneToOne
+    private Employeer employeer;
 
 
     public int getId() {
@@ -52,8 +61,44 @@ public class User {
         this.name = name;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<Authority> set = new HashSet<>();
+
+            set.add(new Authority(this.getRole()));
+
+
+
+        return set;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -92,19 +137,11 @@ public class User {
         this.vendor = vendor;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public House_assistant getHouse_assistant() {
+    public HouseAssistant getHouse_assistant() {
         return house_assistant;
     }
 
-    public void setHouse_assistant(House_assistant house_assistant) {
+    public void setHouse_assistant(HouseAssistant house_assistant) {
         this.house_assistant = house_assistant;
     }
 
@@ -122,5 +159,21 @@ public class User {
 
     public void setLegal(Legal legal) {
         this.legal = legal;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Employeer getEmployeer() {
+        return employeer;
+    }
+
+    public void setEmployeer(Employeer employeer) {
+        this.employeer = employeer;
     }
 }

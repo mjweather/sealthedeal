@@ -11,10 +11,30 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String name;
-    private String specialized;
 
-    @OneToOne
+    private String specialized;
+    private String registrationNumber;
+    private String name;
+    private String appointmentContact;
+    private String degree;
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
+
+    public String getAppointmentContact() {
+        return appointmentContact;
+    }
+
+    public void setAppointmentContact(String appointmentContact) {
+        this.appointmentContact = appointmentContact;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private User user;
 
@@ -27,14 +47,6 @@ public class Doctor {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSpecialized() {
@@ -61,4 +73,19 @@ public class Doctor {
         DoctorHasConsumer = doctorHasConsumer;
     }
 
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

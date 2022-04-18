@@ -1,5 +1,7 @@
 package com.bechalor.sealthedeal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,14 +12,16 @@ public class Apartment {
     private String address;
     private int rent;
     private String description;
+    private String name;
+    private String status;
 
-    @OneToOne
-    private User user;
 
-    @OneToOne
+    @ManyToOne
+    @JsonIgnore
     private Consumer consumer;
 
     @ManyToOne
+    @JsonIgnore
     private Vendor vendor;
 
     public int getId() {
@@ -52,14 +56,6 @@ public class Apartment {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Consumer getConsumer() {
         return consumer;
     }
@@ -74,5 +70,21 @@ public class Apartment {
 
     public void setVendor(Vendor vendor) {
         this.vendor = vendor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

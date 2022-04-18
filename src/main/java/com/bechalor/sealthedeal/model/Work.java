@@ -1,7 +1,8 @@
 package com.bechalor.sealthedeal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -15,9 +16,12 @@ public class Work {
     private double amount;
     private String description;
 
-    @OneToMany(mappedBy = "work",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "work",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<WorkHasConsumer> workHasConsumers=new LinkedList<>();
 
+    @ManyToOne
+    @JsonIgnore
+   private Employeer employeer;
     public int getId() {
         return id;
     }
@@ -56,5 +60,13 @@ public class Work {
 
     public void setWorkHasConsumers(List<WorkHasConsumer> workHasConsumers) {
         this.workHasConsumers = workHasConsumers;
+    }
+
+    public Employeer getEmployeer() {
+        return employeer;
+    }
+
+    public void setEmployeer(Employeer employeer) {
+        this.employeer = employeer;
     }
 }

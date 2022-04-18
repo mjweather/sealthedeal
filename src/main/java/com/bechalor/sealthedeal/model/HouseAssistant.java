@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Entity
-public class House_assistant {
+public class HouseAssistant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -16,12 +16,21 @@ public class House_assistant {
     private String type;
     private double rating;
     private String address;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @OneToOne
     @JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "house_assistant",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "houseAssistant",cascade = CascadeType.ALL)
     private List<HouseAssistantHasConsumer> houseAssistantHasConsumer=new LinkedList<>();
 
     public int getId() {

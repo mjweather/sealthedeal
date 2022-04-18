@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 import com.bechalor.sealthedeal.model.AdminModel.Admins;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Ads
@@ -18,8 +19,10 @@ public class Ads
     private String product_name;
 
     @ManyToOne
+    @JsonIgnore
     private Vendor vendor;
     @ManyToOne
+    @JsonIgnore
     private Admins admin;
 
     public int getId() {
@@ -85,4 +88,5 @@ public class Ads
     public void setProduct_name(String product_name) {
         this.product_name = product_name;
     }
+
 }
